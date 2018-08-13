@@ -39,17 +39,17 @@ namespace QuickStart4_WebApiClienWithApollo
             services.AddSingleton<ApolloConfigurationManager>();
 
             services.AddOptions()
-            .Configure<Value>(config)
-            .Configure<Value>("other", anotherConfig);
+            //.Configure<Value>(config)
+            //.Configure<Value>("other", anotherConfig);
 
             //.Configure<ApplicationSetting>(config);
-            // .Configure<apollo>(config.GetSection("apollo"));
+             .Configure<apollo>(config.GetSection("apollo"));
 
             var serviceProvider = services.BuildServiceProvider();
 
-            var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<Value>>();
+            //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<Value>>();
             //// var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
-            // var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
+             var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
              optionsMonitor.OnChange(OnChanged);
 
             new ConfigurationManagerDemo(serviceProvider.GetService<ApolloConfigurationManager>());
