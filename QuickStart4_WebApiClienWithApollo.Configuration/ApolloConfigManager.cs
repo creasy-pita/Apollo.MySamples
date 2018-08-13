@@ -38,18 +38,19 @@ namespace QuickStart4_WebApiClienWithApollo
             anotherConfig = Configuration.GetSection("TEST1.test");
             services.AddSingleton<ApolloConfigurationManager>();
 
-           // services.AddOptions()
-           // //.Configure<Value>(config)
-           // //.Configure<Value>("other", anotherConfig);
+            services.AddOptions()
+            .Configure<Value>(config)
+            .Configure<Value>("other", anotherConfig);
 
-           // //.Configure<ApplicationSetting>(config);
-           // .Configure<apollo>(config.GetSection("apollo"));
+            //.Configure<ApplicationSetting>(config);
+            // .Configure<apollo>(config.GetSection("apollo"));
 
-           var serviceProvider = services.BuildServiceProvider();
+            var serviceProvider = services.BuildServiceProvider();
 
-           //// var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
-           // var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
-           // optionsMonitor.OnChange(OnChanged);
+            var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<Value>>();
+            //// var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
+            // var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
+             optionsMonitor.OnChange(OnChanged);
 
             new ConfigurationManagerDemo(serviceProvider.GetService<ApolloConfigurationManager>());
         }
@@ -74,10 +75,10 @@ namespace QuickStart4_WebApiClienWithApollo
             Console.WriteLine( " has changed: " + JsonConvert.SerializeObject(value));
         }
 
-        //private void OnChanged(Value value, string name)
-        //{
-        //    Console.WriteLine(name + " has changed: " + JsonConvert.SerializeObject(value));
-        //}
+        private void OnChanged(Value value, string name)
+        {
+            Console.WriteLine(name + " has changed: " + JsonConvert.SerializeObject(value));
+        }
 
         //private void OnChanged(ConfigurationRoot value, string name)
         //{
