@@ -14,43 +14,43 @@ namespace QuickStart4_WebApiClienWithApollo
 {
     public class ApolloConfigManager
     {
-        private static readonly IConfiguration Configuration;
+        //private static readonly IConfiguration Configuration;
         static ApolloConfigManager()
         {
-            var builder = new ConfigurationBuilder();
+            //var builder = new ConfigurationBuilder();
 
-            builder.AddJsonFile("appsettings.Development.json");
-            builder
-            .AddApollo(builder.Build().GetSection("apollo"))
-            .AddDefault()
-            .AddNamespace("application");
+            //builder.AddJsonFile("appsettings.Development.json");
+            //builder
+            //.AddApollo(builder.Build().GetSection("apollo"))
+            //.AddDefault()
+            //.AddNamespace("application");
 
-            Configuration = builder.Build();
+            //Configuration = builder.Build();
         }
 
         private readonly string DEFAULT_VALUE = "undefined";
         private readonly IConfiguration config;
         private readonly IConfiguration anotherConfig;
 
-        public ApolloConfigManager(IServiceCollection services)
+        public ApolloConfigManager(IServiceCollection services, IConfiguration Configuration)
         {
             config = Configuration;
             anotherConfig = Configuration.GetSection("TEST1.test");
             services.AddSingleton<ApolloConfigurationManager>();
 
-            services.AddOptions()
-            //.Configure<Value>(config)
-            //.Configure<Value>("other", anotherConfig);
+            //services.AddOptions()
+            ////.Configure<Value>(config)
+            ////.Configure<Value>("other", anotherConfig);
 
-            //.Configure<ApplicationSetting>(config);
-             .Configure<apollo>(config.GetSection("apollo"));
+            ////.Configure<ApplicationSetting>(config);
+            // .Configure<apollo>(config.GetSection("apollo"));
 
             var serviceProvider = services.BuildServiceProvider();
 
             //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<Value>>();
             //// var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
-             var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
-             optionsMonitor.OnChange(OnChanged);
+             //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
+             //optionsMonitor.OnChange(OnChanged);
 
             new ConfigurationManagerDemo(serviceProvider.GetService<ApolloConfigurationManager>());
         }

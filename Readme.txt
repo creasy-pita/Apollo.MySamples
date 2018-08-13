@@ -28,6 +28,9 @@ appconfig.json 需要修改  copy to outputdirectory 属性为 copy
 			var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
             optionsMonitor.OnChange(OnChanged);
 	问题
-		热更新问题 ，以上代码 OnChange 并没有被调用？？？？ TBD		
-		var builder = new ConfigurationBuilder();
+		热更新问题 ，以上代码 OnChange 并没有被调用？？？？ TBD	
+			ApolloConfigManager build的 configuration不能work
+			
+		尝试
+			把ApolloConfigManager中创建的 Configuration 代码块合并到startup中的 Configuration，应该可以 work
 			
