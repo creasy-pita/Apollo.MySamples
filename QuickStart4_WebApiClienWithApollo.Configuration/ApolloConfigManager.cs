@@ -75,7 +75,7 @@ namespace QuickStart4_WebApiClienWithApollo
             Console.WriteLine( " has changed: " + JsonConvert.SerializeObject(value));
         }
 
-        private void OnChanged(Value value, string name)
+        private void OnChanged(Value value)
         {
             Console.WriteLine(name + " has changed: " + JsonConvert.SerializeObject(value));
         }
