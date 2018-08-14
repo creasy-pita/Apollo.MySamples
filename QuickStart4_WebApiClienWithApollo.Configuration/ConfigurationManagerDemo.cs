@@ -12,7 +12,7 @@ namespace QuickStart4_WebApiClienWithApollo
         public ConfigurationManagerDemo(ApolloConfigurationManager configurationManager)
         {
             config = configurationManager.GetAppConfig().Result;
-            anotherConfig = configurationManager.GetConfig("application").Result;
+            anotherConfig = configurationManager.GetConfig("TempUser").Result;
             config.ConfigChanged += OnChanged;
             anotherConfig.ConfigChanged += OnChanged;
         }

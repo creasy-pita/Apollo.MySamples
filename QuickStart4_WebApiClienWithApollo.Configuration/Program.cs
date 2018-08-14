@@ -24,7 +24,7 @@ namespace QuickStart4_WebApiClienWithApollo.Configuration
                     builder.AddJsonFile("appsettings.Development.json")
                     .AddApollo(builder.Build().GetSection("apollo"))
                     .AddDefault()
-                    .AddNamespace("application");
+                    .AddNamespace("TempUser");
                 })
 
                 .UseStartup<Startup>()

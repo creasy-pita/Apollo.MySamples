@@ -35,7 +35,7 @@ namespace QuickStart4_WebApiClienWithApollo
         public ApolloConfigManager(IServiceCollection services, IConfiguration Configuration)
         {
             config = Configuration;
-            anotherConfig = Configuration.GetSection("TEST1.test");
+            //anotherConfig = Configuration.GetSection("TEST1.test");
             services.AddSingleton<ApolloConfigurationManager>();
 
             //services.AddOptions()

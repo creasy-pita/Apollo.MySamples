@@ -1,3 +1,13 @@
+2018-8-14
+	问题
+		热更新问题 ，以上代码 OnChange 并没有被调用
+	解决
+		之前直接手动修改 同步到客户端的配置，发现并不会触发onchange
+		如果在服务端apollo配置中心修改 可以正常触发onchange事件
+
+
+2018-8-13
+
 appllo netcore 客户端quickstart
 
 1 QuickStart4_WebApiClienWithApollo.Configuration

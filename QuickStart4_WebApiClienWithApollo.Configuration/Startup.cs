@@ -25,20 +25,20 @@ namespace QuickStart4_WebApiClienWithApollo.Configuration
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddOptions().Configure<TempUser>(Configuration.GetSection("TestUser"));
-
-            //var serviceProvider = services.BuildServiceProvider();
-            //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<TempUser>>();
-            //optionsMonitor.OnChange(OnChanged);
-
-            services.AddOptions()
-            .Configure<apollo>(Configuration.GetSection("apollo"));
+            services.AddOptions().Configure<TempUser>(Configuration.GetSection("TempUser"));
 
             var serviceProvider = services.BuildServiceProvider();
-
-            // var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
-            var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
+            var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<TempUser>>();
             optionsMonitor.OnChange(OnChanged);
+
+            //services.AddOptions()
+            //.Configure<ApplicationSetting>(Configuration);
+
+            //var serviceProvider = services.BuildServiceProvider();
+
+            //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
+            //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
+            //optionsMonitor.OnChange(OnChanged);
 
             ApolloConfigManager apolloConfigManager = new ApolloConfigManager(services,Configuration);
             services.AddSingleton(typeof(ApolloConfigManager), apolloConfigManager);
@@ -55,6 +55,11 @@ namespace QuickStart4_WebApiClienWithApollo.Configuration
             
             app.UseMvc();
         }
+        public void OnChanged(ApplicationSetting user,string name)
+        {
+            Console.WriteLine(name+ "changed") ;
+        }
+
         public void OnChanged(apollo user)
         {
             Console.WriteLine("apollo  changed");
