@@ -20,7 +20,8 @@ namespace QuickStart4_WebApiClienWithApollo.Configuration.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            string value =_apolloConfigManager.GetConfig("config.jdbc.username");
+            string value =_apolloConfigManager.GetConfig("ID");
+            //string value =_apolloConfigManager.GetConfig("config.jdbc.username");
             return new string[] { "value1", "value2",  value};
         }
 

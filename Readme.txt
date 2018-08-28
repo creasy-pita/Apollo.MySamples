@@ -1,3 +1,11 @@
+2018-8-28
+对2018-8-14 问题补充
+	热更新事件处理的两种形式
+	1 ApolloConfigManager 中使用 ConfigurationManagerDemo ，ConfigurationManagerDemo 的 OnChange 事件不能触发
+	2 而ApolloConfigManager 加入 optionsMonitor.OnChange(OnChanged); OnChanged 事件可以正常触发
+	第1种不能正常工作  TBD
+	两者区别 2 不能读取 oldvalue
+
 2018-8-14
 	问题
 		热更新问题 ，以上代码 OnChange 并没有被调用

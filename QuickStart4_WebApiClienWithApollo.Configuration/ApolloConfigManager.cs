@@ -37,22 +37,17 @@ namespace QuickStart4_WebApiClienWithApollo
             config = Configuration;
             //anotherConfig = Configuration.GetSection("TEST1.test");
             services.AddSingleton<ApolloConfigurationManager>();
-
-            //services.AddOptions()
-            ////.Configure<Value>(config)
+            //通过 IOptionsMonitor 对config 订阅 onchange
+            services.AddOptions()
+            .Configure<Value>(config);
             ////.Configure<Value>("other", anotherConfig);
-
-            ////.Configure<ApplicationSetting>(config);
-            // .Configure<apollo>(config.GetSection("apollo"));
 
             var serviceProvider = services.BuildServiceProvider();
 
-            //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<Value>>();
-            //// var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<ApplicationSetting>>();
-             //var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<apollo>>();
-             //optionsMonitor.OnChange(OnChanged);
-
-            new ConfigurationManagerDemo(serviceProvider.GetService<ApolloConfigurationManager>());
+            var optionsMonitor = serviceProvider.GetService<IOptionsMonitor<Value>>();
+             optionsMonitor.OnChange(OnChanged);
+            //此处 ConfigChanged 触发有问题 ，先注释 TBD
+            //new ConfigurationManagerDemo(serviceProvider.GetService<ApolloConfigurationManager>());
         }
 
         public string GetConfig(string key)
